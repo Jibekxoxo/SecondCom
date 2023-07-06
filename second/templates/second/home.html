@@ -16,10 +16,10 @@
             <div class="card-footer text-white p-lg-5">
               <div class="row gutter-1">
                 <div class="col-md-8">
-                  <h2>Cotton Cardigans</h2>
+                  <h2>For women</h2>
                 </div>
                 <div class="col-md-4 text-md-right">
-                  <a href="" class="btn btn-outline-white">Shop Now</a>
+                  <a href="{% url 'women' %}" class="btn btn-outline-white">View</a>
                 </div>
               </div>
             </div>
@@ -27,18 +27,18 @@
         </div>
         <div class="col-md-6">
           <div class="card card-tile">
-            <figure class="card-image equal vh-50 vh-md-100">
-              <span class="image image--scroll" style="background-image: url(static/images/index2-slide-1.jpg)"
+            <figure class="card-image equal vh-10 vh-md-100">
+              <span class="image image--scroll" style="background-image: url(https://images.pexels.com/photos/14009941/pexels-photo-14009941.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)"
                 data--100-bottom-top="transform: translateY(0%);"
                 data-top-bottom="transform: translateY(25%);"></span>
             </figure>
             <div class="card-footer text-white p-lg-5">
               <div class="row gutter-1">
                 <div class="col-md-8">
-                  <h2>Fancy Jewelery</h2>
+                  <h2>For men</h2>
                 </div>
                 <div class="col-md-4 text-md-right">
-                  <a href="" class="btn btn-outline-white">Shop Now</a>
+                  <a href="{% url 'men' %}" class="btn btn-outline-white">View</a>
                 </div>
               </div>
             </div>
@@ -58,70 +58,28 @@
           <h2>Black Casual Look</h2>
         </div>
       </div>
-      <div class="row gutter-1">
-        <div class="col-lg-6">
-          <figure class="equal">
-            <span class="image" style="background-image: url(static/images/image-5.jpg)"></span>
-          </figure>
+          <div class = "row">
+          {% for product in products %}
+          <div class=" col-lg-4">
+            <div class="card card-product mb-1">
+              <figure class="card-image equal">
+                <a href="{% url 'details' product.id %}" class="image">
+                  <img src="{{product.imageURL}}" alt="Image">
+                </a>
+              </figure>
+              <a href="{% url 'details' product.id %}" class="card-body">
+                <h3 class="card-title">{{ product.name}}</h3>
+                <span class="price">{{ product.price}} cом</span>
+              </a>
+            </div>
+          </div>
+          {% endfor %}
         </div>
-  
-        <div class="col-6 col-lg-3">
-          <div class="card card-product mb-1">
-            <figure class="card-image equal">
-              <a href="#!" class="image">
-                <img src="static/images/look-1.jpg" alt="Image">
-                <img src="static/images/look-1-2.jpg" alt="Image">
-              </a>
-            </figure>
-            <a href="" class="card-body">
-              <h3 class="card-title">Black Blazzer</h3>
-              <span class="price">$98.00</span>
-            </a>
-          </div>
-          <div class="card card-product">
-            <figure class="card-image equal">
-              <a href="#!" class="image">
-                <img src="static/images/look-3.jpg" alt="Image">
-                <img src="static/images/look-3-1.jpg" alt="Image">
-              </a>
-            </figure>
-            <a href="" class="card-body">
-              <h3 class="card-title">Gold Earrings</h3>
-              <span class="price">$260.00</span>
-            </a>
-          </div>
         </div>
-  
-        <div class="col-6 col-lg-3">
-          <div class="card card-product mb-1">
-            <figure class="card-image equal">
-              <a href="#!" class="image">
-                <img src="static/images/look-2.jpg" alt="Image">
-                <img src="static/images/look-2-1.jpg" alt="Image">
-              </a>
-            </figure>
-            <a href="" class="card-body">
-              <h3 class="card-title">Black T-Shirt</h3>
-              <span class="price">$24.00</span>
-            </a>
-          </div>
-          <div class="card card-product">
-            <figure class="card-image equal">
-              <a href="#!" class="image">
-                <img src="static/images/look-4.jpg" alt="Image">
-                <img src="static/images/look-4-1.jpg" alt="Image">
-              </a>
-            </figure>
-            <a href="" class="card-body">
-              <h3 class="card-title">Sunglass</h3>
-              <span class="price">$18.00</span>
-            </a>
-          </div>
-        </div>
-      </div>
+
       <div class="row">
         <div class="col text-center">
-          <a href="" class="underlined">View more looks</a>
+          <a href="{% url 'store' %}" class="underlined">View more looks</a>
         </div>
       </div>
     </div>
@@ -137,8 +95,8 @@
       <div class="row gutter-2 gutter-md-4 justify-content-between vh-75 py-10">
         <div class="col-md-6 align-self-end">
           <div class="bg-white w-50 w-lg-40 d-inline-block p-3">
-            <h2 class="fs-24"><span class="d-block text-gray">Gold Jewlery</span>Earrings & Rings</h2>
-            <a href="" class="underlined">Shop Now</a>
+            <h2 class="fs-24"><span class="d-block text-gray">Мы не зацикливаемся на моде и брендах, </span>мы cобираем в магазине то, что на наш взгляд, заслуживает внимания</h2>
+            <a href="{% url 'store' %}" class="underlined">Shop Now</a>
           </div>
         </div>
       </div>
@@ -155,26 +113,26 @@
           <h2>Trending Looks</h2>
         </div>
         <div class="col-md-6 text-right">
-          <a href="" class="underlined">View More</a>
+          <a href="{% url 'store' %}" class="underlined">View More</a>
         </div>
       </div>
       <div class="row gutter-1">
         <div class="col-lg-4">
           <div class="card card-product">
             <figure class="card-image">
-              <a href="#!">
+              <a href="{% url 'store' %}">
                 <img src="static/images/look-5.jpg" alt="Image">
                 <img src="static/images/look-5-1.jpg" alt="Image">
               </a>
             </figure>
-            <a href="" class="card-body">
+            <a href="{% url 'store' %}" class="card-body">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="card-title font-weight-bold">Look name</h3>
-                  <small class="text-muted">3 items</small>
+                  <h3 class="card-title font-weight-bold">Пиджак бежевый</h3>
+                  <small class="text-muted"></small>
                 </div>
                 <div class="col-4 text-right">
-                  <span class="price">$120.00</span>
+                  <span class="price">900 сом</span>
                 </div>
               </div>
             </a>
@@ -183,19 +141,19 @@
         <div class="col-lg-4">
           <div class="card card-product">
             <figure class="card-image">
-              <a href="#!">
+              <a href="{% url 'store' %}">
                 <img src="static/images/look-6.jpg" alt="Image">
                 <img src="static/images/look-6-1.jpg" alt="Image">
               </a>
             </figure>
-            <a href="" class="card-body">
+            <a href="{% url 'store' %}" class="card-body">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="card-title font-weight-bold">Brand name</h3>
-                  <small class="text-muted">2 items</small>
+                  <h3 class="card-title font-weight-bold">Белая футболка</h3>
+                  <small class="text-muted"></small>
                 </div>
                 <div class="col-4 text-right">
-                  <span class="price">$90.00</span>
+                  <span class="price">300 сом</span>
                 </div>
               </div>
             </a>
@@ -204,19 +162,19 @@
         <div class="col-lg-4">
           <div class="card card-product">
             <figure class="card-image">
-              <a href="#!">
+              <a href="{%url 'store'%}">
                 <img src="static/images/product-3.jpg" alt="Image">
                 <img src="static/images/product-3-3.jpg" alt="Image">
               </a>
             </figure>
-            <a href="" class="card-body">
+            <a href="{% url 'store' %}" class="card-body">
               <div class="row align-items-center">
                 <div class="col-8">
-                  <h3 class="card-title font-weight-bold">Look name</h3>
-                  <small class="text-muted">2 items</small>
+                  <h3 class="card-title font-weight-bold">Желтая юбка</h3>
+                  <small class="text-muted"></small>
                 </div>
                 <div class="col-4 text-right">
-                  <span class="price">$110.00</span>
+                  <span class="price">800 сом</span>
                 </div>
               </div>
             </a>

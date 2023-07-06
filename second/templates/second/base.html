@@ -14,7 +14,26 @@
 
   gtag('config', 'UA-176058743-2');
 </script>
+<script type="text/javascript">
+  var user = '{{request.user}}'
 
+  function getToken(name){
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+
+        if (cookie.substring(0, name.length +1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  var csrftoken = getToken('csrftoken') 
+</script>
   </head>
   <body>
 
@@ -23,17 +42,20 @@
       <div class="container">
         <div class="row">
           <nav class="navbar navbar-expand-lg navbar-light">
-            <a href="base.html" class="navbar-brand order-1 order-lg-2"><h1>SecondCom</h1></a>
-
             <div class="collapse navbar-collapse order-4 order-lg-1" id="navbarMenu">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown dropdown-sm dropdown-hover">
-                  <a class="nav-link dropdown-toggle" href="#!" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle" href="home.html" id="navbarDropdown-1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Home
                   </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown-1">
+                    <ul class="menu-list">
+                      <li class="menu-list-item"><a href="{% url 'home' %}" class="menu-list-link">Homepage</a></li>
+                    </ul>
+                  </div>
                 </li>
                 <li class="nav-item dropdown dropdown-lg dropdown-hover">
-                  <a class="nav-link dropdown-toggle" href="#!" id="navbarDropdown-2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle text-red" href="#!" id="navbarDropdown-2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Category
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown-2">
@@ -42,76 +64,28 @@
                         <div class="col-lg-2">
                           <span class="eyebrow text-muted mb-1">Shop</span>
                           <ul class="menu-list">
-                            <li class="menu-list-item"><a href="listing.html" class="menu-list-link">Listing sidebar</a></li>
-                            <li class="menu-list-item"><a href="listing-2.html" class="menu-list-link">Listing full width</a></li>
-                            <li class="menu-list-item"><a href="product.html" class="menu-list-link">Product default</a></li>
-                            <li class="menu-list-item"><a href="product-2.html" class="menu-list-link">Product carousel</a></li>
-                            <li class="menu-list-item"><a href="lookbook.html" class="menu-list-link">Lookbook</a></li>
+                            <li class="menu-list-item"><a href="{% url 'store' %}" class="menu-list-link">For men</a></li>
+                            <li class="menu-list-item"><a href="{% url 'store' %}" class="menu-list-link">For women</a></li>
+                            <li class="menu-list-item"><a href="{% url 'store' %}" class="menu-list-link">Product carousel</a></li>
+
                           </ul>
                         </div>
                         <div class="col-lg-2">
                           <span class="eyebrow text-muted mb-1">Cart</span>
                           <ul class="menu-list">
-                            <li class="menu-list-item"><a href="cart.html" class="menu-list-link">Cart</a></li>
-                            <li class="menu-list-item"><a href="checkout.html" class="menu-list-link">Checkout</a></li>
-                            <li class="menu-list-item"><a href="order.html" class="menu-list-link">Order</a></li>
+                            <li class="menu-list-item"><a href="{% url 'cart' %}" class="menu-list-link">Cart</a></li>
+                            <li class="menu-list-item"><a href="{% url 'checkout' %}" class="menu-list-link">Checkout</a></li>
+                            <!-- <li class="menu-list-item"><a href="order.html" class="menu-list-link">Order</a></li> -->
                           </ul>
                         </div>
-                        <div class="col-lg-4">
-                          <span class="eyebrow text-muted mb-1">Account</span>
-                          <div class="row">
-                            <div class="col-6">
-                              <ul class="menu-list">
-                                <li class="menu-list-item"><a href="account-order-list.html" class="menu-list-link">Order list</a></li>
-                                <li class="menu-list-item"><a href="account-order-details.html" class="menu-list-link">Order details</a></li>
-                                <li class="menu-list-item"><a href="account-favorites.html" class="menu-list-link">Favorites</a></li>
-                                <li class="menu-list-item"><a href="account-personal-data.html" class="menu-list-link">Personal data</a></li>
-                                <li class="menu-list-item"><a href="account-password.html" class="menu-list-link">Change password</a></li>
-                              </ul>
-                            </div>
-                            <div class="col-6">
-                              <ul class="menu-list">
-                                <li class="menu-list-item"><a href="account-address-list.html" class="menu-list-link">Adresses</a></li>
-                                <li class="menu-list-item"><a href="account-address-edit.html" class="menu-list-link">Edit address</a></li>
-                                <li class="menu-list-item"><a href="login.html" class="menu-list-link">Login</a></li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-2">
-                          <span class="eyebrow text-muted mb-1">Other Pages</span>
-                          <ul class="menu-list">
-                            <li class="menu-list-item"><a href="about.html" class="menu-list-link">About</a></li>
-                            <li class="menu-list-item"><a href="contact.html" class="menu-list-link">Contact</a></li>
-                            <li class="menu-list-item"><a href="blog.html" class="menu-list-link">Blog</a></li>
-                            <li class="menu-list-item"><a href="blog-post.html" class="menu-list-link">Blog post</a></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </li>
                 <li class="nav-item dropdown-lg dropdown-hover">
-                  <a class="nav-link dropdown-toggle text-red" href="#!" id="navbarDropdown-3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sale
-                  </a>
-                  
-
+                  <a href="{% url 'home' %}">
+                  <li class="navbar-brand order-1 order-lg-1"><h1>____________________SecondCom________________________</h1></li></a>
             <div class="collapse navbar-collapse order-5 order-lg-3" id="navbarMenu2">
               <ul class="navbar-nav ml-auto position-relative">
 
-                <!-- search -->
-                <li class="nav-item dropdown dropdown-md dropdown-hover">
-                  <a class="nav-icon dropdown-toggle" id="navbarDropdown-4" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{% static 'images/search.svg' %}" alt="Search"></a>
-                    <span class="d-inline-block d-lg-none">Search</span>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown-4">
-                    <div class="form-group">
-                      <input type="text" class="form-control" id="searchForm" placeholder="Search for items and brands">
-                    </div>
-                  </div>
-                </li>
 
                
                 <!-- user area -->
@@ -127,57 +101,46 @@
                           <div class="row">
                             <div class="col-12">
                               <div class="form-label-group">
-                                <input type="text" id="inputName" class="form-control form-control-lg" placeholder="Name" required="" value="Dumitru">
-                                <label for="inputName">First Name</label>
+                               
                               </div>
                             </div>
                           </div>
                           <div class="row">
                             <div class="col-12">
                               <div class="form-label-group">
-                                <input type="text" id="inputSurname" class="form-control form-control-lg" placeholder="Surname" required="">
-                                <label for="inputSurname">Surname</label>
+                                
                               </div>
                             </div>
                           </div>
                         </fieldset>
                       </div>
                       <div class="col-12 text-center">
-                        <a href="" class="underline fs-14">Forgot Password ?</a>
                       </div>
+                      {% if user.is_authenticated %}
                       <div class="col-12">
-                        <a href="" class="btn btn-primary btn-block">Sign In</a>
-                        <a href="" class="btn btn-outline-secondary btn-block">Create Account</a>
+                        <a href="#" class="btn btn-primary btn-block">My profle</a>                      </div>
+                      {% else %}
+                      <div class="col-12">
+                        <a href="{% url 'login' %}" class="btn btn-primary btn-block">Sign In</a>
+                        <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-block">Create Account</a>
                       </div>
+                      {% endif %}
                     </div>
                   </div>
                 </li>
 
                 <!-- favourites -->
                 <li class="d-none d-lg-inline nav-item dropdown dropdown-md dropdown-hover">
-                  <a class="nav-icon" id="navbarDropdown-7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'images/heart.svg' %}" alt="Favorites"></a></a>
+                  <a class="nav-icon" id="navbarDropdown-7" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'images/cart2.svg' %}" alt="Favorites"></a></a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown-7">
                     <div class="row gutter-3">
                       <div class="col-12">
-                        <h3 class="eyebrow text-dark fs-16 mb-1">My Favorites</h3>
-                        <p class="text-muted fs-14"><a href="" class="underline">Sign in</a> to keep your saves for up to 60 days.</p>
-                      </div>
                       <div class="col-12">
-                        <div class="cart-item">
-                          <a href="#!" class="cart-item-image"><img src="{% static  'images/product-1.jpg' %}" alt="Image"></a>
-                          <div class="cart-item-body">
                             <div class="row">
                               <div class="col-9">
-                                <h5 class="cart-item-title">Bold Cuff Insert Polo Shirt</h5>
-                                <small>Fred Perry</small>
-                                <ul class="list list--horizontal fs-14">
-                                  <li><s>$85.00</s></li>
-                                  <li class="text-red">$42.00</li>
-                                </ul>
-                              </div>
                               <div class="col-3 text-right">
                                 <ul class="cart-item-options">
-                                  <li><a href="" class="icon-x"></a></li>
+                                  <p id="cart-total">{{cartItems}}</p>
                                 </ul>
                               </div>
                             </div>
@@ -185,89 +148,13 @@
                         </div>
                       </div>
                       <div class="col-12">
-                        <a href="" class="btn btn-primary btn-block">Add all to cart</a>
-                        <a href="" class="btn btn-outline-secondary btn-block">View favorites</a>
+                        <a href="{% url 'cart' %}" class="btn btn-primary btn-block">Add to cart</a>
                       </div>
                     </div>
                   </div>
                 </li>
 
-                <!-- cart -->
-                <li class="nav-item dropdown dropdown-md dropdown-hover">
-                  <a class="nav-icon dropdown-toggle" id="navbarDropdown-8" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img src="{% static 'images/cart2.svg' %}" alt="Cart"></a>
-                    <span class="d-inline-block d-lg-none">Bag</span>
-                  </a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown-8">
-                    <div class="row gutter-3">
-                      <div class="col-12">
-                        <h3 class="eyebrow text-dark fs-16 mb-0">My Bag</h3>
-                      </div>
-                      <div class="col-12">
-                        <div class="cart-item">
-                          <a href="#!" class="cart-item-image"><img src="{% static 'images/product-1.jpg' %}" alt="Image"></a>
-                          <div class="cart-item-body">
-                            <div class="row">
-                              <div class="col-9">
-                                <h5 class="cart-item-title">Bold Cuff Insert Polo Shirt</h5>
-                                <small>Fred Perry</small>
-                                <ul class="list list--horizontal fs-14">
-                                  <li><s>$85.00</s></li>
-                                  <li class="text-red">$42.00</li>
-                                </ul>
-                              </div>
-                              <div class="col-3 text-right">
-                                <ul class="cart-item-options">
-                                  <li><a href="" class="icon-x"></a></li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-12">
-                        <ul class="list-group list-group-minimal">
-                          <li class="list-group-item d-flex justify-content-between align-items-center text-uppercase font-weight-bold">
-                            Subtotal
-                            <span>$78.00</span>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="col-12">
-                        <a href="" class="btn btn-primary btn-block">Add all to cart</a>
-                        <a href="" class="btn btn-outline-secondary btn-block">View favorites</a>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-
-            <div class="order-2 d-flex d-lg-none" id="navbarMenuMobile">
-              <ul class="navbar-nav navbar-nav--icons ml-auto position-relative">
-
-                <!-- search -->
-                <li class="nav-item">
-                  <a href="" class="nav-icon"><i class="icon-search"></i></a>
-                </li>
-
-                <!-- cart -->
-                <li class="nav-item dropdown dropdown-md dropdown-hover">
-                  <a href="#" class="nav-icon"><img src="{% static 'images/cart2.svg' %}"></a>
-                </li>
-
-                <!-- menu -->
-                <li class="nav-item dropdown dropdown-md dropdown-hover">
-                  <a href="" class="nav-icon" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="icon-menu"></i>
-                  </a>
-                </li>
-
-              </ul>
-            </div>
-          </nav>
-        </div>
-      </div>
+              
     </header>
 
 {% block content %}
@@ -280,7 +167,7 @@
       </div>
 
           <!-- menu -->
-          <div class="order-1 col-md-8 col-lg-4">
+          <div class="col-md-4 col-lg-8">
             <div class="row">
               <div class="col">
                 <h4 class="eyebrow mb-1">Company</h4>
@@ -289,41 +176,18 @@
                   <li class="menu-list-item"><a href="" class="menu-list-link">Contact</a></li>
                 </ul>
               </div>
-              <div class="col">
-                <h4 class="eyebrow mb-1">Help Center</h4>
-                <ul class="menu-list">
-                  <li class="menu-list-item"><a href="" class="menu-list-link">Shipping</a></li>
-                  <li class="menu-list-item"><a href="" class="menu-list-link">Payment</a></li>
-                </ul>
-              </div>
             </div>
           </div>
-
           <!-- subscribe -->
-          <div class="order-2 order-md-3 order-lg-2 col-md-8 col-lg-4">
-            <h4 class="eyebrow mb-1">Subscribe to Newsletter</h4>
-            <div class="input-combined mb-2">
-              <input type="text" class="form-control" placeholder="Your email" aria-label="Your Email" aria-describedby="button-addon2">
-              <button class="btn btn-white" type="button" id="button-addon2">Subscribe</button>
-              <span class="input-combined_indicator"></span>
-            </div>
-            <ul class="list list--horizontal">
+            <!-- <ul class="list list--horizontal">
               <li><a href="#!" class="text-hover-instagram"> <img src="static/images/instagram.svg" alt="Image"></a></li>
               <li><a href="#!" class="text-hover-twitter"><i class="fs-28 icon-twitter-square-brands"></i></a></li>
               <li><a href="#!" class="text-hover-pinterest"><i class="fs-28 icon-pinterest-square-brands"></i></a></li>
             </ul>
-          </div>
+          </div> -->
 
           <!-- settings -->
           
-            <ul class="list list--horizontal mt-2">
-              <li><img src="static/images/visa-1.svg" class="payment" alt="Image"></li>
-              <li><img src="static/images/master-card-1.svg" class="payment" alt="Image"></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
       <div class="bg-transparent mt-8 py-2">
         <div class="container">
           <div class="row align-items-center gutter-1">
@@ -333,9 +197,12 @@
     </footer>
 
 
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
-    <script src="{% static 'js/vendor.min.js' %}"></script>
-    <script src="{% static 'js/app.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
   </body>
 </html>

@@ -2,22 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
+
 class Gender(models.Model):
     name = models.CharField(max_length=10)
 
     def __str__(self):
         return self.name
 
-class SubCategory(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name
-
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    gender = models.ForeignKey(Gender, on_delete=models.CASCADE)
-    subcategories = models.ManyToManyField(SubCategory)
 
     def __str__(self):
         return self.name
@@ -28,17 +21,23 @@ class Customer(models.Model):
     email = models.CharField(max_length=200)
 
     def __str__(self):
-        return self.name
+        return self.user.username
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
+    content = models.TextField(blank=True)
     price = models.FloatField()
     digital = models.BooleanField(default=False, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
+    image2 = models.ImageField(null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True)
+    favorite = models.BooleanField(null=False)
+    sale = models.BooleanField(null=False)
 
     def __str__(self):
         return self.name
+    
     
     @property
     def imageURL(self):
@@ -58,6 +57,15 @@ class Order(models.Model):
         return str(self.id)
     
     @property
+    def shipping(self):
+        shipping = False
+        orderitems = self.orderitem_set.all()
+        for i in  orderitems:
+            if i.product.digital == False:
+                shipping = True
+        return shipping
+    
+    @property
     def get_cart_total(self):
         orderitems = self.orderitem_set.all()
         total = sum([item.get_total for item in orderitems])
@@ -68,6 +76,7 @@ class Order(models.Model):
         orderitems = self.orderitem_set.all()
         total = sum([item.quantity for item in orderitems])
         return total
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
@@ -92,15 +101,15 @@ class ShippingAddress(models.Model):
     def __str__(self):
         return self.address
     
-# def create_customer(sender, instance, created, **kwargs):
-#     if created:
-#         Customer.objects.create(user=instance)
+def create_customer(sender, instance, created, **kwargs):
+    if created:
+        Customer.objects.create(user=instance)
     
-# post_save.connect(create_customer, sender=User)
+post_save.connect(create_customer, sender=User)
 
-# def update_customer(sender, instance, created, **kwargs):
-#     if created == False:
-#         instance.customer.save()
+def update_customer(sender, instance, created, **kwargs):
+    if created == False:
+        instance.customer.save()
 
-# post_save.connect(update_customer, sender=User)
+post_save.connect(update_customer, sender=User)
 

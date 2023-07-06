@@ -1,0 +1,49 @@
+{% extends 'second/base.html' %}
+{% load static %}
+{% block content %}
+<br>
+<br>
+<br>
+<br>
+    <style>
+        /* Стили для товара */
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+        }
+        
+        .product img {
+            width: 10%;
+            max-height: 10px;
+            object-fit: contain;
+        }
+        
+        .product .title {
+            font-weight: bold;
+            margin-top: 30px;
+        }
+        
+        .product .price {
+            color: #bc1717;
+        }
+    </style>
+</head>
+<body>
+    <div class="product"></div>
+    <img class="thumbnail" src="{{product.imageURL}}">
+        <div class="title">{{product.name}}</div>
+        <div class="title">{{product.content}}</div>
+        <div class="image">{{product.image}}</div>
+        <div class="image">{{product.image2}}</div>
+        <div class="price">{{product.price}} c</div>
+        <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+    </div>
+</body>
+
+{% endblock content %}
+
+
+
+
+      <img class="thumbnail" src="{{product.imageURL}}">
