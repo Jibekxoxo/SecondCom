@@ -20,4 +20,7 @@ urlpatterns = [
     path('login/register/', views.RegisterPage.as_view(), name="register"),
     path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 
+    path('about/', views.about, name="about"),
+    path('contact/', views.contact, name="contact"),
+
 ]

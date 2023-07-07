@@ -170,6 +170,12 @@ class RegisterPage(FormView):
             return redirect('home')
         return super().get(*args, **kwargs)
     
+def contact(request):
+    return render(request, 'second/contact.html')
+
+def about(request):
+    return render(request, 'second/about.html')
+    
 
 # def order(request, slug):
 #     course = get_object_or_404(Course, slug=slug)
